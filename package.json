@@ -1,0 +1,14 @@
+{
+  "name": "messsenger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron index.js"
+  },
+  "author": "Rustem Islamuratov",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^8.1.1"
+  }
+}
