@@ -1,22 +1,32 @@
 @import '../index.module.scss';
 
 .Menu {
-  width: 70px;
+  width: $widthMenu;
   height: 100%;
   background-color: $backgroundColor;
 
+  .Title {
+    padding: 35px 0 0 0;
+    font-size: 12px;
+    text-align: center;
+    -webkit-app-region: drag;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+  }
+
   .MenuItem {
     display: block;
-    width: 50px;
-    height: 50px;
-    padding: 10px;
+    width: $widthMenu;
+    height: $widthMenu;
     &:hover {
       background-color: #ffffff22;
     }
 
     img {
-      max-width: 50px;
-      max-height: 50px;
+      max-width: 54px;
+      max-height: 54px;
+      margin: 10px;
     }
   }
 

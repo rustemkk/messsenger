@@ -11,6 +11,9 @@ const Menu = () => {
 
   return (
     <div className={s.Menu}>
+      <div className={s.Title}>
+        Messsenger
+      </div>
       {windows.map(window =>
         <NavLink className={s.MenuItem} activeClassName={s.MenuItemActive} key={window.id} to={`/window/${window.id}`}>
           <img alt={window.name} src={window.iconUrl} />

@@ -6,11 +6,12 @@ const appURL = `http://localhost:4000`;
 
 function createWindow() {
   const browserWindow = new BrowserWindow({
-    width: 905,
+    width: 900,
     height: 700,
     webPreferences: {
       webviewTag: true,
     },
+    titleBarStyle: 'hiddenInset',
   });
   browserWindow.setTitle(appName);
   browserWindow.webContents.openDevTools();
