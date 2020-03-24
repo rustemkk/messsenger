@@ -2,8 +2,9 @@ import cn from 'classnames';
 import { get } from 'lodash';
 import React from 'react';
 import WebView from 'react-electron-web-view';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { updateWindowNotificationsCount } from '../slices/windowsSlice';
 import { selectWindows } from '../slices/windowsSlice';
 import s from './WindowsPage.module.scss';
 import { useRouteMatch } from 'react-router-dom';
@@ -15,6 +16,26 @@ const WindowsPage = () => {
   const match = useRouteMatch({ path: '/window/:windowId', strict: true, sensitive: true });
   const windowId = +get(match, 'params.windowId');
   const windows = useSelector(selectWindows);
+  const dispatch = useDispatch();
+
+  const onPageTitleUpdated = (e, window) => {
+    switch (window.name) {
+      case 'Gmail':
+      case 'Skype':
+      case 'WhatsApp':
+      case 'Messenger':
+      case 'LinkedIn':
+        const count = parseInt(get(e.title.match(/\(([^)]+)\)/), '1', 0));
+        dispatch(updateWindowNotificationsCount({ windowId: window.id, count }));
+        break;
+      // case 'Slack': {
+      //   console.log(e.title);
+      //   const count = e.title.match(/^[*!]/) ? 1 : 0;
+      //   dispatch(updateWindowNotificationsCount({ windowId: window.id, count }));
+      //   break;
+      // }
+    }
+  }
 
   return (
     <div className={cn(s.WindowsPage, windowId && s.WindowsPageVisible)}>
@@ -23,6 +44,7 @@ const WindowsPage = () => {
           <WebView
             allowpopups
             className={s.WebView}
+            onPageTitleUpdated={(e) => onPageTitleUpdated(e, window)}
             src={window.url}
             useragent={userAgent}
           />
