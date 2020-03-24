@@ -6,8 +6,8 @@ const appURL = `http://localhost:4000`;
 
 function createWindow() {
   const browserWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 905,
+    height: 700,
     webPreferences: {
       webviewTag: true,
     },

@@ -1,0 +1,9 @@
+$backgroundColor: #282c34;
+
+body {
+  margin: 0;
+  font-family: 'Baloo 2', cursive;
+  background-color: $backgroundColor;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

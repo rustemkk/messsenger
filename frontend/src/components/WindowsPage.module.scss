@@ -1,0 +1,36 @@
+@import '../index.module.scss';
+
+.WindowsPage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 70px;
+  z-index: -1;
+
+  .WebViewContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-color: $backgroundColor;
+
+    .WebView {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  .WebViewContainerVisible {
+    z-index: 1;
+  }
+}
+
+.WindowsPageVisible {
+  z-index: 1;
+}
