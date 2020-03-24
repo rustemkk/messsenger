@@ -5,7 +5,7 @@ import React from 'react';
 import s from './Badge.module.scss';
 
 
-const Badge = ({ className, isBlinking, style, value }) => {
+const Badge = ({ className, style, value }) => {
   return !value || value <= 0 ? null : (
     <span
       className={cn(
@@ -14,7 +14,6 @@ const Badge = ({ className, isBlinking, style, value }) => {
         value >= 10 && value < 100 && s.Number2Digits,
         value >= 100 && s.Number3Digits,
         value === 1 && s.Transparent,
-        isBlinking && s.Blink,
       )}
       style={style}
     >

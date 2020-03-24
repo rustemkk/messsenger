@@ -1,8 +1,8 @@
 const { app, BrowserWindow } = require('electron');
 
 
-const appName = `http://localhost:4000`;
-const appURL = `http://localhost:4000`;
+const appName = 'Messsenger';
+const appURL = 'http://localhost:4000';
 
 function createWindow() {
   const browserWindow = new BrowserWindow({
