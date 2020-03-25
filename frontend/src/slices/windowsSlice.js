@@ -23,13 +23,27 @@ const defaultWindows = [
     url: 'https://web.whatsapp.com/',
     notificationsCount: 0,
   },
-  {
-    id: 4,
-    name: 'Messenger',
-    iconUrl: 'https://scontent.fhel4-1.fna.fbcdn.net/v/t39.8562-6/37789948_1959933824027454_666414594595487744_n.png?_nc_cat=1&_nc_sid=6825c5&_nc_ohc=t_3mmGa0TKoAX80-X9j&_nc_ht=scontent.fhel4-1.fna&oh=4c0fe31b4f9609eb254d2927e8694f16&oe=5E9ECBB3',
-    url: 'https://www.messenger.com/',
-    notificationsCount: 12,
-  },
+  // {
+  //   id: 4,
+  //   name: 'Messenger',
+  //   iconUrl: 'https://scontent.fhel4-1.fna.fbcdn.net/v/t39.8562-6/37789948_1959933824027454_666414594595487744_n.png?_nc_cat=1&_nc_sid=6825c5&_nc_ohc=t_3mmGa0TKoAX80-X9j&_nc_ht=scontent.fhel4-1.fna&oh=4c0fe31b4f9609eb254d2927e8694f16&oe=5E9ECBB3',
+  //   url: 'https://www.messenger.com/',
+  //   notificationsCount: 0,
+  // },
+  // {
+  //   id: 5,
+  //   name: 'LinkedIn',
+  //   iconUrl: 'https://pngimg.com/uploads/linkedIn/linkedIn_PNG32.png',
+  //   url: 'https://www.linked.in/',
+  //   notificationsCount: 0,
+  // },
+  // {
+  //   id: 6,
+  //   name: 'Telegram',
+  //   iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/1200px-Telegram_2019_Logo.svg.png',
+  //   url: 'https://web.telegram.org/',
+  //   notificationsCount: 0,
+  // },
 ];
 
 const getInitialState = () => {

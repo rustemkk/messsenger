@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import Badge from './Badge';
 import s from './Menu.module.scss';
 import { selectWindows } from '../slices/windowsSlice';
 
@@ -18,7 +17,9 @@ const Menu = () => {
       {windows.map(window =>
         <NavLink className={s.MenuItem} activeClassName={s.MenuItemActive} key={window.id} to={`/window/${window.id}`}>
           <img alt={window.name} src={window.iconUrl} />
-          <Badge className={s.NotificationsCount} isBlinking value={window.notificationsCount} />
+          {window.notificationsCount > 0 &&
+            <span className={s.NotificationsCount} />
+          }
         </NavLink>
       )}
     </div>

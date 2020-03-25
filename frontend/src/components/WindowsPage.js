@@ -28,12 +28,11 @@ const WindowsPage = () => {
         const count = parseInt(get(e.title.match(/\(([^)]+)\)/), '1', 0));
         dispatch(updateWindowNotificationsCount({ windowId: window.id, count }));
         break;
-      // case 'Slack': {
-      //   console.log(e.title);
-      //   const count = e.title.match(/^[*!]/) ? 1 : 0;
-      //   dispatch(updateWindowNotificationsCount({ windowId: window.id, count }));
-      //   break;
-      // }
+      case 'Slack': {
+        const count = e.title.match(/^(.)*(\*)+(.)*/) ? 1 : 0;
+        dispatch(updateWindowNotificationsCount({ windowId: window.id, count }));
+        break;
+      }
     }
   }
 
