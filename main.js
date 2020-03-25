@@ -6,13 +6,12 @@ const appName = 'Messsenger';
 const appURL = 'http://localhost:4000';
 
 function createWindow() {
-  console.log(123123, path.join(__dirname, 'preload.js'));
   const browserWindow = new BrowserWindow({
     height: 680,
     titleBarStyle: 'hiddenInset',
     webPreferences: {
       nodeIntegration: true,
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'mainPreload.js'),
       webviewTag: true,
     },
     width: 1000,
