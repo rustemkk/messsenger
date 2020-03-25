@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import windowsReducer from './slices/windowsSlice';
+import appsReducer from './slices/appsSlice';
 
 
 export default configureStore({
   reducer: {
-    windows: windowsReducer,
+    apps: appsReducer,
   },
 });

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 
-const defaultWindows = [
+const defaultApps = [
   {
     id: 1,
     name: 'Skype',
@@ -44,41 +44,48 @@ const defaultWindows = [
   //   url: 'https://web.telegram.org/',
   //   notificationsCount: 0,
   // },
+  {
+    id: 7,
+    name: 'Gmail',
+    iconUrl: 'https://www.gstatic.com/images/branding/product/1x/gmail_512dp.png',
+    url: 'https://mail.google.com/mail/u/0/#inbox',
+    notificationsCount: 0,
+  },
 ];
 
 const getInitialState = () => {
   try {
-    const item = window.localStorage.getItem('windows');
-    return item ? JSON.parse(item) : defaultWindows;
+    const item = window.localStorage.getItem('apps');
+    return item ? JSON.parse(item) : defaultApps;
   } catch (error) {
     console.log(error);
-    return defaultWindows;
+    return defaultApps;
   }
 }
 
 const persistState = (value) => {
-  window.localStorage.setItem('windows', JSON.stringify(value));
+  window.localStorage.setItem('apps', JSON.stringify(value));
 }
 
 export const slice = createSlice({
-  name: 'windows',
+  name: 'apps',
   initialState: getInitialState(),
   reducers: {
-    addWindow: (state, action) => {
-      console.log('reducer addWindow', action);
+    addApp: (state, action) => {
+      console.log('reducer addApp', action);
       state.push(action.payload);
       persistState(state);
     },
-    updateWindowNotificationsCount: (state, action) => {
-      const { windowId, count } = action.payload;
-      const window = state.find(w => w.id === windowId);
-      window.notificationsCount = count;
+    updateAppNotificationsCount: (state, action) => {
+      const { appId, count } = action.payload;
+      const app = state.find(w => w.id === appId);
+      app.notificationsCount = count;
     },
   },
 });
 
-export const { addWindow, updateWindowNotificationsCount } = slice.actions;
+export const { addApp, updateAppNotificationsCount } = slice.actions;
 
-export const selectWindows = state => state.windows;
+export const selectApps = state => state.apps;
 
 export default slice.reducer;

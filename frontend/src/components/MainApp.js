@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import s from './App.module.scss';
+import s from './MainApp.module.scss';
 import Menu from './Menu';
 import SettingsPage from './SettingsPage';
-import WindowsPage from './WindowsPage';
+import AppsPage from './AppsPage';
 
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
         <Route exact path="/settings" component={SettingsPage} />
         <Route component={() => <div>page not found</div>} />
       </Switch>
-      <WindowsPage />
+      <AppsPage />
     </div>
   );
 }

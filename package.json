@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "electron index.js"
+    "start": "electron src/main.js"
   },
   "author": "Rustem Islamuratov",
   "license": "ISC",

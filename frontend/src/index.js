@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 
-import App from './components/App';
+import MainApp from './components/MainApp';
 import './index.module.scss';
 import store from './store';
 
@@ -11,7 +11,7 @@ import store from './store';
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter basename="/">
-      <App />
+      <MainApp />
     </HashRouter>
   </Provider>,
   document.getElementById('root')
