@@ -1,25 +1,28 @@
 {
   "name": "messsenger",
+  "productName": "Messsenger",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "build_frontend": "react-scripts build",
+    "build:frontend": "react-scripts build",
+    "build:mac": "electron-packager . --overwrite --out builds --platform=darwin",
+    "build:win": "electron-packager . --overwrite --out builds --platform=win32",
     "start": "electron main.js",
-    "start_frontend": "PORT=4000 react-scripts start"
+    "start:frontend": "PORT=4000 react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "author": "Rustem Islamuratov",
   "license": "ISC",
+  "devDependencies": {
+    "electron": "^8.1.1",
+    "electron-packager": "^14.2.1"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.1.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "classnames": "^2.2.6",
-    "electron": "^8.1.1",
     "lodash": "^4.17.15",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
