@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 
 import MainApp from './components/MainApp';
-import './index.module.scss';
+import './index.css';
 import store from './store';
 
 

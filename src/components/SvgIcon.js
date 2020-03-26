@@ -4,8 +4,8 @@ import React from 'react';
 
 
 const icons = [
-  'SvgSettings',
-].reduce((acc, curr) => ({ ...acc, [curr]: require(`./${curr}.svg`) }), {});
+  'settings',
+].reduce((acc, curr) => ({ ...acc, [curr]: require(`../svg/${curr}.svg`) }), {});
 
 const SvgIcon = ({ className, name, onClick, size }) => (
   <span

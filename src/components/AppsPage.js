@@ -1,16 +1,53 @@
 import cn from 'classnames';
 import { get } from 'lodash';
 import React from 'react';
+import { createUseStyles, useTheme } from 'react-jss';
 import WebView from 'react-electron-web-view';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { updateAppNotificationsCount } from '../slices/appsSlice';
 import { selectApps } from '../slices/appsSlice';
-import s from './AppsPage.module.scss';
 import { useRouteMatch } from 'react-router-dom';
 
 
+const useStyles = createUseStyles({
+  AppsPage: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: ({ theme }) => theme.menuWidth,
+    zIndex: -1,
+  },
+  AppsPageVisible: {
+    zIndex: 1,
+  },
+  WebViewContainer: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: -1,
+    backgroundColor: ({ theme }) => theme.backgroundColor,
+  },
+  WebViewContainerVisible: {
+    zIndex: 1,
+  },
+  WebView: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
+});
+
 const AppsPage = () => {
+
+  const theme = useTheme();
+  const s = useStyles({ theme });
+
   const match = useRouteMatch({ path: '/app/:appId', strict: true, sensitive: true });
   const appId = +get(match, 'params.appId');
   const apps = useSelector(selectApps);
@@ -44,6 +81,7 @@ const AppsPage = () => {
     const webViewRef = refs[app.id];
     // DevTools for webview app
     webViewRef && app.isWithDevTools && !webViewRef.isDevToolsOpened() && webViewRef.openDevTools();
+    webViewRef && webViewRef.setZoomFactor(0.9);
   }
 
 
