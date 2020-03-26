@@ -2,11 +2,12 @@ const { BrowserWindow, app } = require('electron');
 const path = require('path');
 
 
+let browserWindow = null;
 const appName = 'Messsenger';
 const appURL = 'http://localhost:4000';
 
 function createWindow() {
-  const browserWindow = new BrowserWindow({
+  browserWindow = new BrowserWindow({
     height: 680,
     titleBarStyle: 'hiddenInset',
     webPreferences: {
@@ -31,7 +32,7 @@ app.on("window-all-closed", () => {
 });
 
 app.on("activate", () => {
-  if (mainWindow === null) {
+  if (browserWindow === null) {
     createWindow();
   }
 });
