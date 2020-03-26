@@ -1,13 +1,13 @@
 import cn from 'classnames';
 import { get } from 'lodash';
 import React from 'react';
+import { useRouteMatch, useHistory } from 'react-router-dom';
 import { createUseStyles, useTheme } from 'react-jss';
 import WebView from 'react-electron-web-view';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { updateAppNotificationsCount } from '../slices/appsSlice';
 import { selectApps } from '../slices/appsSlice';
-import { useRouteMatch } from 'react-router-dom';
 
 
 const useStyles = createUseStyles({
@@ -52,6 +52,7 @@ const AppsPage = () => {
   const appId = +get(match, 'params.appId');
   const apps = useSelector(selectApps);
   const dispatch = useDispatch();
+  const history = useHistory();
   const refs = {};
 
   const getPreload = (app) => {
@@ -84,17 +85,38 @@ const AppsPage = () => {
     webViewRef && webViewRef.setZoomFactor(0.9);
   }
 
+  const onIpcMessage = (e, app) => {
+    if (get(e, 'channel') === 'webviewNotification') {
+      const notification = new Notification(app.name, {
+        body: get(e, 'args.0.options.body'),
+        icon: app.iconUrl,
+        silent: true
+      });
+      notification.onclick = () => {
+        notification.close();
+        window.ipcRendererSend('notificationClicked', null);
+        history.push(`/app/${app.id}`);
+      };
+      const audioElement = document.getElementsByClassName('audio-element')[0];
+      audioElement.play();
+      setTimeout(notification.close.bind(notification), 6000);
+    }
+  }
 
   const onNewWindow = (e, app) => {
-    let url = decodeURIComponent(get(e, 'url'));
+    e.stopPropagation();
+    e.preventDefault();
+    const url = decodeURIComponent(get(e, 'url'));
+    if (url === 'about:blank') {
+      return;
+    }
     // google auth in google services should be opened in same page
-    const urlsToOpenInNewTab = ['https://accounts.google.com/AccountChooser'];
-    if (urlsToOpenInNewTab.some(u => url.includes(u))) {
-      e.stopPropagation();
-      e.preventDefault();
+    const urlsToOpenInSameWindow = [
+      'https://accounts.google.com/AccountChooser'
+    ];
+    if (urlsToOpenInSameWindow.some(u => url.includes(u))) {
       const webViewRef = refs[app.id];
       webViewRef && webViewRef.loadURL(url);
-      return;
     } else {
       window.openUrlInDefaultBrowser(url);
     }
@@ -128,6 +150,7 @@ const AppsPage = () => {
             allowpopups
             className={s.WebView}
             onDidFinishLoad={(e) => onDidFinishLoad(e, app)}
+            onIpcMessage={(e) => onIpcMessage(e, app)}
             onNewWindow={(e) => onNewWindow(e, app)}
             onPageTitleUpdated={(e) => onPageTitleUpdated(e, app)}
             preload={getPreload(app)}

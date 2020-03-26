@@ -1,4 +1,4 @@
-const { BrowserWindow, app } = require('electron');
+const { BrowserWindow, app, ipcMain } = require('electron');
 const path = require('path');
 
 
@@ -11,6 +11,7 @@ function createWindow() {
     height: 680,
     titleBarStyle: 'hiddenInset',
     webPreferences: {
+      nativeWindowOpen: true,
       nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js'),
       webviewTag: true,
@@ -25,14 +26,19 @@ function createWindow() {
 
 app.on('ready', createWindow);
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-app.on("activate", () => {
+app.on('activate', () => {
   if (browserWindow === null) {
     createWindow();
   }
+});
+
+ipcMain.on('notificationClicked', () => {
+  browserWindow.show();
+  browserWindow.webContents.focus();
 });

@@ -10,7 +10,7 @@ const useStyles = createUseStyles({
     bottom: 0,
     left: ({ theme }) => theme.menuWidth,
     backgroundColor: ({ theme }) => theme.backgroundColor,
-    borderLeft: '1px solid #ffffff16',
+    borderLeft: ({ theme }) => theme.border,
   },
 });
 
