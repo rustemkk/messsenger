@@ -11,15 +11,14 @@ function createWindow() {
     titleBarStyle: 'hiddenInset',
     webPreferences: {
       nodeIntegration: true,
-      preload: path.join(__dirname, 'mainPreload.js'),
+      preload: path.join(__dirname, 'preload.js'),
       webviewTag: true,
     },
     width: 1000,
   });
   browserWindow.setTitle(appName);
   browserWindow.webContents.openDevTools();
-  // browserWindow.loadFile(path.join(__dirname, "../index.html"));
-  // browserWindow.loadURL(`file://${__dirname}/index.html`);
+  // browserWindow.loadURL(`file://${__dirname}/build/index.html`);
   browserWindow.loadURL(appURL);
 }
 

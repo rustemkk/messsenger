@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "homepage": "./",
   "scripts": {
     "build:frontend": "react-scripts build",
     "build:mac": "electron-packager . --overwrite --out builds --platform=darwin",

@@ -17,6 +17,15 @@ const AppsPage = () => {
   const dispatch = useDispatch();
   const refs = {};
 
+  const getPreload = (app) => {
+    switch (app.name) {
+      case 'WhatsApp':
+        return `file://${window.appDirName}/preloadWebViewWhatsApp.js`;
+      default:
+        return `file://${window.appDirName}/preloadWebview.js`;
+    }
+  }
+
   const getUserAgent = (app) => {
     switch (app.name) {
       case 'Gmail':
@@ -30,6 +39,13 @@ const AppsPage = () => {
         return 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36';
     }
   }
+
+  const onDidFinishLoad = (e, app) => {
+    const webViewRef = refs[app.id];
+    // DevTools for webview app
+    webViewRef && app.isWithDevTools && !webViewRef.isDevToolsOpened() && webViewRef.openDevTools();
+  }
+
 
   const onNewWindow = (e, app) => {
     let url = decodeURIComponent(get(e, 'url'));
@@ -73,8 +89,10 @@ const AppsPage = () => {
           <WebView
             allowpopups
             className={s.WebView}
+            onDidFinishLoad={(e) => onDidFinishLoad(e, app)}
             onNewWindow={(e) => onNewWindow(e, app)}
             onPageTitleUpdated={(e) => onPageTitleUpdated(e, app)}
+            preload={getPreload(app)}
             ref={ref => refs[`${app.id}`] = ref}
             src={app.url}
             useragent={getUserAgent(app)}
