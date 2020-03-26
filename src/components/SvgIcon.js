@@ -1,0 +1,35 @@
+import { isFunction } from 'lodash';
+import PropTypes from 'prop-types';
+import React from 'react';
+
+
+const icons = [
+  'SvgSettings',
+].reduce((acc, curr) => ({ ...acc, [curr]: require(`./${curr}.svg`) }), {});
+
+const SvgIcon = ({ className, name, onClick, size }) => (
+  <span
+    className={className}
+    onClick={isFunction(onClick) ? onClick : undefined}
+    style={{
+      maskImage: `url(${icons[name]})`,
+      maskSize: size ? `${size}px` : '25px',
+      maskRepeat: 'no-repeat',
+      WebkitMaskImage: `url(${icons[name]})`,
+      WebkitMaskSize: size ? `${size}px` : '25px',
+      WebkitMaskRepeat: 'no-repeat',
+      width: size ? `${size}px` : '25px',
+      height: size ? `${size}px` : '25px',
+      display: 'inline-block',
+    }}
+  />
+);
+
+SvgIcon.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+  size: PropTypes.number,
+};
+
+export default SvgIcon;

@@ -1,6 +1,8 @@
 @import '../index.module.scss';
 
 .Menu {
+  display: flex;
+  flex-direction: column;
   width: $widthMenu;
   height: 100%;
   background-color: $backgroundColor;
@@ -15,21 +17,23 @@
   }
 
   .MenuItem {
-    display: block;
+    display: flex;
     position: relative;
-    width: $widthMenu;
-    height: $widthMenu;
+    padding: 5px;
+    margin-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+
     &:hover {
       background-color: #ffffff22;
     }
 
     img {
-      max-width: 54px;
-      max-height: 54px;
-      margin: 10px;
+      max-width: 50px;
+      max-height: 50px;
     }
 
-    .NotificationsCount {
+    .NotificationsBadge {
       position: absolute;
       top: 9px;
       right: 9px;
@@ -37,6 +41,10 @@
       height: 20px;
       border-radius: 50%;
       background-color: palevioletred;
+    }
+
+    .SettingsIcon {
+      background-color: #fff;
     }
   }
 
