@@ -1,9 +1,8 @@
 import cn from 'classnames';
 import { get } from 'lodash';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 import { createUseStyles, useTheme } from 'react-jss';
-import WebView from 'react-electron-web-view';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { updateAppNotificationsCount } from '../slices/appsSlice';
@@ -55,34 +54,12 @@ const AppsPage = () => {
   const history = useHistory();
   const refs = {};
 
-  const getPreload = (app) => {
-    switch (app.name) {
-      case 'WhatsApp':
-        return `file://${window.appDirName}/preloadWebViewWhatsApp.js`;
-      default:
-        return `file://${window.appDirName}/preloadWebview.js`;
-    }
-  }
-
-  const getUserAgent = (app) => {
-    switch (app.name) {
-      case 'Gmail':
-        return 'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10136';
-      case 'Slack':
-      case 'Skype':
-      case 'WhatsApp':
-      case 'Messenger':
-      case 'LinkedIn':
-      default:
-        return 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36';
-    }
-  }
-
   const onDidFinishLoad = (e, app) => {
     const webViewRef = refs[app.id];
     // DevTools for webview app
     webViewRef && app.isWithDevTools && !webViewRef.isDevToolsOpened() && webViewRef.openDevTools();
     webViewRef && webViewRef.setZoomFactor(0.9);
+    webViewRef && webViewRef.setAudioMuted(true);
   }
 
   const onIpcMessage = (e, app) => {
@@ -104,16 +81,16 @@ const AppsPage = () => {
   }
 
   const onNewWindow = (e, app) => {
+    // console.log('onNewWindow - e', e);
     e.stopPropagation();
     e.preventDefault();
     const url = decodeURIComponent(get(e, 'url'));
+    // console.log('onNewWindow - url', url);
     if (url === 'about:blank') {
       return;
     }
     // google auth in google services should be opened in same page
-    const urlsToOpenInSameWindow = [
-      'https://accounts.google.com/AccountChooser'
-    ];
+    const urlsToOpenInSameWindow = ['https://accounts.google.com/AccountChooser'];
     if (urlsToOpenInSameWindow.some(u => url.includes(u))) {
       const webViewRef = refs[app.id];
       webViewRef && webViewRef.loadURL(url);
@@ -142,21 +119,27 @@ const AppsPage = () => {
     }
   }
 
+  useEffect(() => {
+    apps.forEach(app => {
+      const webViewRef = refs[app.id];
+      webViewRef.addEventListener('did-finish-load', (e) => onDidFinishLoad(e, app));
+      webViewRef.addEventListener('ipc-message', (e) => onIpcMessage(e, app));
+      webViewRef.addEventListener('new-window', (e) => onNewWindow(e, app));
+      webViewRef.addEventListener('page-title-updated', (e) => onPageTitleUpdated(e, app));
+    });
+  }, []); // eslint-disable-line
+
   return (
     <div className={cn(s.AppsPage, appId && s.AppsPageVisible)}>
       {apps.map(app =>
         <div className={cn(s.WebViewContainer, appId === app.id && s.WebViewContainerVisible)} key={app.id}>
-          <WebView
-            allowpopups
+          <webview
+            allowpopups="true"
             className={s.WebView}
-            onDidFinishLoad={(e) => onDidFinishLoad(e, app)}
-            onIpcMessage={(e) => onIpcMessage(e, app)}
-            onNewWindow={(e) => onNewWindow(e, app)}
-            onPageTitleUpdated={(e) => onPageTitleUpdated(e, app)}
-            preload={getPreload(app)}
+            preload={app.preload}
             ref={ref => refs[`${app.id}`] = ref}
             src={app.url}
-            useragent={getUserAgent(app)}
+            useragent={app.userAgent}
           />
         </div>
       )}

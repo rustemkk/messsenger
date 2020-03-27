@@ -11,7 +11,6 @@ function createWindow() {
     height: 680,
     titleBarStyle: 'hiddenInset',
     webPreferences: {
-      nativeWindowOpen: true,
       nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js'),
       webviewTag: true,
