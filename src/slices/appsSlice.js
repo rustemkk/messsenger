@@ -73,6 +73,28 @@ const defaultApps = [
     // userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36 Edge/12.10136',
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
   },
+  {
+    iconUrl: 'https://www.gstatic.com/images/branding/product/1x/gmail_512dp.png',
+    id: 8,
+    // isWithDevTools: true,
+    name: 'Gmail',
+    notificationsCount: 0,
+    partition: 'styliff',
+    preload: `file://${window.appDirName}/preloadWebview.js`,
+    url: 'https://mail.google.com/mail/u/0/#inbox',
+    // userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36 Edge/12.10136',
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
+  },
+  {
+    iconUrl: 'https://lh3.googleusercontent.com/oCgYUoM7WKsJWfOKBbpWsGElgjJW4kCIYYvTBxJ0zYBc_jDxqoSalQUX4MiH-adzrag',
+    id: 9,
+    // isWithDevTools: true,
+    name: 'Yandex Mail',
+    notificationsCount: 0,
+    preload: `file://${window.appDirName}/preloadWebview.js`,
+    url: 'https://mail.yandex.ru/',
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
+  },
 ];
 
 const getInitialState = () => {

@@ -100,9 +100,15 @@ const AppsPage = () => {
   }
 
   const onPageTitleUpdated = (e, app) => {
+    // console.log('onPageTitleUpdated - e.title', e.title);
     switch (app.name) {
       case 'Slack': {
         const count = e.title.match(/^(.)*(\*)+(.)*/) ? 1 : 0;
+        dispatch(updateAppNotificationsCount({ appId: app.id, count }));
+        break;
+      }
+      case 'Yandex Mail': {
+        const count = parseInt(get(e.title.match(/^[0-9]/), '0', 0));
         dispatch(updateAppNotificationsCount({ appId: app.id, count }));
         break;
       }
@@ -136,6 +142,7 @@ const AppsPage = () => {
           <webview
             allowpopups="true"
             className={s.WebView}
+            partition={app.partition}
             preload={app.preload}
             ref={ref => refs[`${app.id}`] = ref}
             src={app.url}
