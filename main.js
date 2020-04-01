@@ -4,7 +4,12 @@ const path = require('path');
 
 let browserWindow = null;
 let appURL = `file://${__dirname}/build-frontend/index.html`;
-// appURL = 'http://localhost:4000';
+let isWithDevTools = false;
+
+if (process.env.NODE_ENV === 'dev') {
+  appURL = 'http://localhost:4000';
+  isWithDevTools = true;
+}
 
 function createWindow() {
   browserWindow = new BrowserWindow({
@@ -17,7 +22,7 @@ function createWindow() {
     },
     width: 1000,
   });
-  // browserWindow.webContents.openDevTools();
+  isWithDevTools && browserWindow.webContents.openDevTools();
   browserWindow.loadURL(appURL);
   browserWindow.on('closed', () => browserWindow = null);
 }

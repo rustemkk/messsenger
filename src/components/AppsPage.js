@@ -93,6 +93,7 @@ const AppsPage = () => {
     const urlsToOpenInSameWindow = ['https://accounts.google.com/AccountChooser'];
     if (urlsToOpenInSameWindow.some(u => url.includes(u))) {
       const webViewRef = refs[app.id];
+      // console.log('onNewWindow - webViewRef', webViewRef);
       webViewRef && webViewRef.loadURL(url);
     } else {
       window.openUrlInDefaultBrowser(url);
@@ -128,6 +129,7 @@ const AppsPage = () => {
   useEffect(() => {
     apps.forEach(app => {
       const webViewRef = refs[app.id];
+      // console.log('webViewRef', webViewRef);
       webViewRef.addEventListener('did-finish-load', (e) => onDidFinishLoad(e, app));
       webViewRef.addEventListener('ipc-message', (e) => onIpcMessage(e, app));
       webViewRef.addEventListener('new-window', (e) => onNewWindow(e, app));
