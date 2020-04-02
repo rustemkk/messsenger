@@ -104,7 +104,7 @@ const AppsPage = () => {
     // console.log('onPageTitleUpdated - e.title', e.title);
     switch (app.name) {
       case 'Slack': {
-        const count = e.title.match(/^(.)*(\*)+(.)*/) ? 1 : 0;
+        const count = parseInt(get(e.title.match(/([0-9]) new items/), '1', 0));
         dispatch(updateAppNotificationsCount({ appId: app.id, count }));
         break;
       }
