@@ -145,10 +145,10 @@ const AppsPage = () => {
             allowpopups="true"
             className={s.WebView}
             partition={app.partition}
-            preload={app.preload}
+            preload={`file://${window.appDirName}/${app.preload || 'preloadWebview.js'}`}
             ref={ref => refs[`${app.id}`] = ref}
             src={app.url}
-            useragent={app.userAgent}
+            useragent={app.userAgent || 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'}
           />
         </div>
       )}
