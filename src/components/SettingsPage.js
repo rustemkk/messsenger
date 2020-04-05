@@ -34,7 +34,7 @@ const SettingsPage = () => {
       {/* <div className={s.SettingsHeader}>Settings</div> */}
       {/* <div className={s.SettingsHeader}>Apps</div> */}
       {apps.map(app =>
-        <AppSettings id={app.id} key={app.id} />
+        <AppSettings appId={app.id} key={app.id} />
       )}
     </div>
   );

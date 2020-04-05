@@ -98,17 +98,26 @@ export const slice = createSlice({
   initialState: getInitialState(),
   reducers: {
     addApp: (state, action) => {
-      console.log('reducer addApp', action);
+      // console.log('reducer addApp', action);
       state.push(action.payload);
       persistState(state);
     },
+    deleteApp: (state, action) => {
+      // console.log('reducer deleteApp', action);
+      const { appId } = action.payload;
+      const appIndex = state.filter(a => a.id !== appId);
+      state.splice(appIndex, 1);
+      persistState(state);
+    },
     updateApp: (state, action) => {
-      const { id: appId } = action.payload;
-      const appIndex = state.findIndex(w => w.id === appId);
-      state[appIndex] = action.payload;
+      // console.log('reducer updateApp', action);
+      const { appId, app } = action.payload;
+      const appIndex = state.findIndex(a => a.id === appId);
+      state[appIndex] = app;
       persistState(state);
     },
     updateAppNotificationsCount: (state, action) => {
+      // console.log('reducer updateAppNotificationsCount', action);
       const { appId, count } = action.payload;
       const app = state.find(w => w.id === appId);
       app.notificationsCount = count;
@@ -116,7 +125,7 @@ export const slice = createSlice({
   },
 });
 
-export const { addApp, updateApp, updateAppNotificationsCount } = slice.actions;
+export const { addApp, deleteApp, updateApp, updateAppNotificationsCount } = slice.actions;
 
 export const selectApps = state => state.apps;
 

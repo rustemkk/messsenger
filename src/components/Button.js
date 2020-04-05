@@ -5,9 +5,10 @@ import { createUseStyles, useTheme } from 'react-jss';
 
 
 const useStyles = createUseStyles({
-  FormButton: {
+  Button: {
     minWidth: '100px',
     padding: '5px 10px',
+    margin: '0 10px 0 0',
     outline: 'none',
     border: ({ theme }) => theme.border,
     color: '#fff',
@@ -21,14 +22,14 @@ const useStyles = createUseStyles({
   },
 });
 
-const FormButton = ({ className, label, onClick }) => {
+const Button = ({ className, label, onClick }) => {
 
   const theme = useTheme();
   const s = useStyles({ theme });
 
   return (
     <button
-      className={cn(s.FormButton, className)}
+      className={cn(s.Button, className)}
       onClick={onClick}
       type={onClick ? 'button' : 'submit'}
     >
@@ -37,10 +38,10 @@ const FormButton = ({ className, label, onClick }) => {
   );
 };
 
-FormButton.propTypes = {
+Button.propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default FormButton;
+export default Button;
