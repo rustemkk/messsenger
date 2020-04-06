@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'dev') {
 function createWindow() {
   browserWindow = new BrowserWindow({
     height: 680,
-    titleBarStyle: 'hiddenInset',
+    titleBarStyle: 'hidden',
     webPreferences: {
       nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js'),

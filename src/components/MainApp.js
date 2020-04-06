@@ -10,7 +10,7 @@ import AppsPage from './AppsPage';
 const theme = {
   backgroundColor: '#282c34',
   border: '1px solid #ffffff16',
-  menuWidth: '74px',
+  menuWidth: '73px',
 };
 
 const useStyles = createUseStyles({

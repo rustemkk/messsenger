@@ -110,7 +110,7 @@ export const slice = createSlice({
     deleteApp: (state, action) => {
       // console.log('reducer deleteApp', action);
       const { appId } = action.payload;
-      const appIndex = state.filter(a => a.id !== appId);
+      const appIndex = state.findIndex(a => a.id === appId);
       state.splice(appIndex, 1);
       persistState(state);
     },

@@ -16,7 +16,7 @@ const useStyles = createUseStyles({
     backgroundColor: ({ theme }) => theme.backgroundColor,
   },
   Title: {
-    padding: '40px 0 10px 0',
+    padding: '30px 0 10px 0',
     fontSize: '12px',
     textAlign: 'center',
     cursor: 'pointer',
