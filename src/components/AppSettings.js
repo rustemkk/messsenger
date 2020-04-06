@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { get } from 'lodash';
 import { PropTypes } from 'prop-types';
 import React, { useState } from 'react';
 import { createUseStyles, useTheme } from 'react-jss';
@@ -25,13 +26,14 @@ const useStyles = createUseStyles({
     '& img': {
       maxWidth: '100px',
       maxHeight: '100px',
+      padding: '10px 10px 10px 20px',
     },
     alignItems: 'center',
   },
   NameAndUrl: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '10px 20px',
+    padding: '10px 10px',
   },
   Name: {
     fontSize: '20px',
@@ -39,6 +41,11 @@ const useStyles = createUseStyles({
   Url: {
     fontSize: '12px',
     margin: '0 0 10px 0',
+  },
+  AppIcon: {
+    maxWidth: '50px',
+    maxHeight: '50px',
+    padding: '10px 10px 10px 220px',
   }
 });
 
@@ -67,7 +74,7 @@ const AppSettings = ({ appId }) => {
             {app.name}
           </div>
           <div className={s.Url}>
-            ({app.url})
+            {app.url && `(${app.url})`}
           </div>
           <Button label="Edit" onClick={() => setIsEdit(true)} />
           <Button label="Delete" onClick={() => dispatch(deleteApp({ appId }))} />
@@ -98,6 +105,7 @@ const AppSettings = ({ appId }) => {
         placeholder="Icon URL"
         {...form}
       />
+      <img className={s.AppIcon} alt={get(values, 'name')} src={get(values, 'iconUrl')} />
       <FormInput
         label="Preload file name"
         name="preload"
