@@ -99,7 +99,12 @@ export const slice = createSlice({
   reducers: {
     addApp: (state, action) => {
       // console.log('reducer addApp', action);
-      state.push(action.payload);
+      const maxId = state.reduce((max, app) => Math.max(max, app.id), 0);
+      state.push({
+        id: maxId + 1,
+        iconUrl: 'https://lh3.googleusercontent.com/8hC6BL1MFzvV1x114LtLxGtllABPhJGVFEzEpWPLk5iOlz4bZ2-uuqr0DyT4oAR1iCuh',
+        name: 'New app',
+      });
       persistState(state);
     },
     deleteApp: (state, action) => {
