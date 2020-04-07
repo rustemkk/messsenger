@@ -9,7 +9,7 @@ import Button from './Button';
 
 const useStyles = createUseStyles({
   SettingsPage: {
-    padding: '10px',
+    padding: '20px 10px',
     position: 'absolute',
     top: 0,
     right: 0,
@@ -17,6 +17,7 @@ const useStyles = createUseStyles({
     left: ({ theme }) => theme.menuWidth,
     backgroundColor: ({ theme }) => theme.backgroundColor,
     borderLeft: ({ theme }) => theme.border,
+    overflow: 'scroll',
   },
   SettingsHeader: {
     margin: '10px 0 0 150px',
