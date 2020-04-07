@@ -6,9 +6,10 @@ const defaultApps = [
   {
     iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Skype_logo_%282019%E2%80%93present%29.svg/1200px-Skype_logo_%282019%E2%80%93present%29.svg.png',
     id: 1,
-    // isWithDevTools: true,
+    isWithDevTools: true,
     name: 'Skype',
     notificationsCount: 0,
+    preload: 'preloadWebviewSkype.js',
     url: 'https://web.skype.com/',
   },
   // {
@@ -52,14 +53,14 @@ const defaultApps = [
   //   notificationsCount: 0,
   //   url: 'https://web.telegram.org/',
   // },
-  {
-    iconUrl: 'https://www.gstatic.com/images/branding/product/1x/gmail_512dp.png',
-    id: 7,
-    // isWithDevTools: true,
-    name: 'Gmail',
-    notificationsCount: 0,
-    url: 'https://mail.google.com/mail/u/0/#inbox',
-  },
+  // {
+  //   iconUrl: 'https://www.gstatic.com/images/branding/product/1x/gmail_512dp.png',
+  //   id: 7,
+  //   // isWithDevTools: true,
+  //   name: 'Gmail',
+  //   notificationsCount: 0,
+  //   url: 'https://mail.google.com/mail/u/0/#inbox',
+  // },
   // {
   //   iconUrl: 'https://www.gstatic.com/images/branding/product/1x/gmail_512dp.png',
   //   id: 8,
