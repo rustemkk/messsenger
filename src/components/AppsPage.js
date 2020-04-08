@@ -5,7 +5,14 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 import { createUseStyles, useTheme } from 'react-jss';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateAppNotificationsCount } from '../slices/appsSlice';
+import {
+  ACTION_REQUIRED_GO_BACK,
+  ACTION_REQUIRED_GO_FORWARD,
+  ACTION_REQUIRED_GO_HOME,
+  ACTION_REQUIRED_REFRESH,
+  updateApp,
+  updateAppNotificationsCount,
+} from '../slices/appsSlice';
 import { selectApps } from '../slices/appsSlice';
 
 
@@ -136,6 +143,29 @@ const AppsPage = () => {
       webViewRef.addEventListener('page-title-updated', (e) => onPageTitleUpdated(e, app));
     });
   }, []); // eslint-disable-line
+
+  useEffect(() => {
+    apps.forEach(app => {
+      if (app.actionRequired) {
+        const webViewRef = refs[app.id];
+        switch (app.actionRequired) {
+          case ACTION_REQUIRED_GO_BACK:
+            webViewRef && webViewRef.goBack();
+            break;
+          case ACTION_REQUIRED_GO_FORWARD:
+            webViewRef && webViewRef.goForward();
+            break;
+          case ACTION_REQUIRED_GO_HOME:
+            webViewRef && webViewRef.loadURL(app.url);
+            break;
+          case ACTION_REQUIRED_REFRESH:
+          default:
+            webViewRef && webViewRef.reload();
+        }
+        dispatch(updateApp({ appId: app.id, app: { actionRequired: null } }))
+      }
+    });
+  }); // eslint-disable-line
 
   return (
     <div className={cn(s.AppsPage, appId && s.AppsPageVisible)}>

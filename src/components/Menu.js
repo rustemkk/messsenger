@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import SvgIcon from './SvgIcon';
+import Toolbar from './Toolbar';
 import { selectApps } from '../slices/appsSlice';
 
 
@@ -30,8 +31,12 @@ const useStyles = createUseStyles({
     marginBottom: '5px',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
     '&:hover': {
       backgroundColor: '#ffffff22',
+      '& $Toolbar': {
+        display: 'flex',
+      },
     },
     '& img': {
       maxWidth: '50px',
@@ -52,6 +57,13 @@ const useStyles = createUseStyles({
   },
   SettingsIcon: {
     backgroundColor: '#fff',
+  },
+  Toolbar: {
+    display: 'none',
+    position: 'absolute',
+    top: 0,
+    left: ({ theme }) => theme.menuWidth,
+    zIndex: 20,
   }
 });
 
@@ -73,6 +85,7 @@ const Menu = () => {
           {app.notificationsCount > 0 &&
             <span className={s.NotificationsBadge} />
           }
+          <Toolbar appId={app.id} className={s.Toolbar} />
         </NavLink>
       )}
       <NavLink className={s.MenuItem} to="/settings">

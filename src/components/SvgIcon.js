@@ -4,6 +4,10 @@ import React from 'react';
 
 
 const icons = [
+  'arrowLeft',
+  'arrowRight',
+  'home',
+  'refresh',
   'settings',
 ].reduce((acc, curr) => ({ ...acc, [curr]: require(`../svg/${curr}.svg`) }), {});
 
