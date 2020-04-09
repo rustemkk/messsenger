@@ -1,4 +1,5 @@
 const { BrowserWindow, app, ipcMain } = require('electron');
+const windowStateKeeper = require('electron-window-state');
 const path = require('path');
 
 
@@ -12,16 +13,23 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 function createWindow() {
+  const mainWindowState = windowStateKeeper({
+    defaultWidth: 1000,
+    defaultHeight: 800
+  });
   browserWindow = new BrowserWindow({
-    height: 680,
+    height: mainWindowState.height,
     titleBarStyle: 'hidden',
     webPreferences: {
       nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js'),
       webviewTag: true,
     },
-    width: 1000,
+    width: mainWindowState.width,
+    x: mainWindowState.x,
+    y: mainWindowState.y,
   });
+  mainWindowState.manage(browserWindow);
   isWithDevTools && browserWindow.webContents.openDevTools();
   browserWindow.loadURL(appURL);
   browserWindow.on('closed', () => browserWindow = null);

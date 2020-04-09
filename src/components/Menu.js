@@ -18,7 +18,7 @@ const useStyles = createUseStyles({
   },
   Title: {
     padding: '30px 0 10px 0',
-    fontSize: '12px',
+    fontSize: '10px',
     textAlign: 'center',
     cursor: 'pointer',
     WebkitAppRegion: 'drag',
@@ -31,7 +31,6 @@ const useStyles = createUseStyles({
     marginBottom: '5px',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'relative',
     '&:hover': {
       backgroundColor: '#ffffff22',
       '& $Toolbar': {
