@@ -15,3 +15,7 @@ const stopServiceWorker = async () => {
 window.addEventListener('load', async () => {
   await stopServiceWorker();
 });
+
+setTimeout(() => {
+  Array.from(document.getElementsByTagName('div')).find(t => t.innerText === 'Update available').parentElement.parentElement.parentElement.parentElement.style.display = 'none';
+}, 20000);
