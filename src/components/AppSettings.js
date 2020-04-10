@@ -124,6 +124,12 @@ const AppSettings = ({ appId }) => {
         placeholder="Partition (leave blank to use default Partition)"
         {...form}
       />
+      <FormInput
+        label="Zoom Factor"
+        name="zoomFactor"
+        placeholder="Zoom Factor (1 - regular view, try 0.9 or 1.2 to adjust zoom of the app)"
+        {...form}
+      />
       <div className={s.Buttons}>
         <Button label="Save" />
         <Button

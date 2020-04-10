@@ -66,7 +66,7 @@ const AppsPage = () => {
     const webViewRef = refs[app.id];
     // DevTools for webview app
     webViewRef && app.isWithDevTools && !webViewRef.isDevToolsOpened() && webViewRef.openDevTools();
-    webViewRef && webViewRef.setZoomFactor(0.9);
+    webViewRef && webViewRef.setZoomFactor(+app.zoomFactor || 0.9);
     webViewRef && webViewRef.setAudioMuted(true);
   }
 
