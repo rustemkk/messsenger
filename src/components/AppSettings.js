@@ -6,7 +6,7 @@ import { createUseStyles, useTheme } from 'react-jss';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useForm } from '../hooks';
-import { selectAppById } from '../slices/appsSlice';
+import { selectAppById, ACTION_REQUIRED_REFRESH } from '../slices/appsSlice';
 import { deleteApp, updateApp } from '../slices/appsSlice';
 import Button from './Button';
 import FormInput from './FormInput';
@@ -58,7 +58,7 @@ const AppSettings = ({ appId }) => {
   const app = useSelector(state => selectAppById(appId)(state));
 
   const form = useForm(() => {
-    dispatch(updateApp({ appId, app: values }));
+    dispatch(updateApp({ appId, app: { ...values, actionRequired: ACTION_REQUIRED_REFRESH } }));
     setIsEdit(false);
   }, null, app);
   const { handleReinitialize, handleSubmit, values } = form;
@@ -116,6 +116,12 @@ const AppSettings = ({ appId }) => {
         label="UserAgent"
         name="userAgent"
         placeholder="UserAgent (leave blank to use default UserAgent)"
+        {...form}
+      />
+      <FormInput
+        label="Partition"
+        name="partition"
+        placeholder="Partition (leave blank to use default Partition)"
         {...form}
       />
       <div className={s.Buttons}>

@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { get } from 'lodash';
 import React, { useEffect } from 'react';
+import WebView from 'react-electron-web-view';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 import { createUseStyles, useTheme } from 'react-jss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -135,17 +136,6 @@ const AppsPage = () => {
 
   useEffect(() => {
     apps.forEach(app => {
-      const webViewRef = refs[app.id];
-      // console.log('webViewRef', webViewRef);
-      webViewRef.addEventListener('did-finish-load', (e) => onDidFinishLoad(e, app));
-      webViewRef.addEventListener('ipc-message', (e) => onIpcMessage(e, app));
-      webViewRef.addEventListener('new-window', (e) => onNewWindow(e, app));
-      webViewRef.addEventListener('page-title-updated', (e) => onPageTitleUpdated(e, app));
-    });
-  }, []); // eslint-disable-line
-
-  useEffect(() => {
-    apps.forEach(app => {
       if (app.actionRequired) {
         const webViewRef = refs[app.id];
         switch (app.actionRequired) {
@@ -158,28 +148,32 @@ const AppsPage = () => {
           case ACTION_REQUIRED_GO_HOME:
             webViewRef && webViewRef.loadURL(app.url);
             break;
-          case ACTION_REQUIRED_REFRESH:
           default:
-            webViewRef && webViewRef.reload();
         }
         dispatch(updateApp({ appId: app.id, app: { actionRequired: null } }))
       }
     });
-  }); // eslint-disable-line
+  }, [apps]); // eslint-disable-line
 
   return (
     <div className={cn(s.AppsPage, appId && s.AppsPageVisible)}>
       {apps.map(app =>
         <div className={cn(s.WebViewContainer, appId === app.id && s.WebViewContainerVisible)} key={app.id}>
-          <webview
-            allowpopups="true"
-            className={s.WebView}
-            partition={app.partition}
-            preload={`file://${window.appDirName}/${app.preload || 'preloadWebview.js'}`}
-            ref={ref => refs[`${app.id}`] = ref}
-            src={app.url}
-            useragent={app.userAgent || 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'}
-          />
+          {app.actionRequired !== ACTION_REQUIRED_REFRESH &&
+            <WebView
+              allowpopups
+              className={s.WebView}
+              partition={app.partition}
+              preload={`file://${window.appDirName}/${app.preload || 'preloadWebview.js'}`}
+              ref={ref => refs[`${app.id}`] = ref}
+              onDidFinishLoad={(e) => onDidFinishLoad(e, app)}
+              onIpcMessage={(e) => onIpcMessage(e, app)}
+              onNewWindow={(e) => onNewWindow(e, app)}
+              onPageTitleUpdated={(e) => onPageTitleUpdated(e, app)}
+              src={app.url}
+              useragent={app.userAgent || 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'}
+            />
+          }
         </div>
       )}
     </div>
