@@ -10,10 +10,10 @@ import { selectApps } from '../slices/appsSlice';
 
 const useStyles = createUseStyles({
   Menu: {
+    height: '100vh',
     display: 'flex',
     flexDirection: 'column',
     width: ({ theme }) => theme.menuWidth,
-    height: '100%',
     backgroundColor: ({ theme }) => theme.backgroundColor,
   },
   Title: {
@@ -23,6 +23,9 @@ const useStyles = createUseStyles({
     cursor: 'pointer',
     WebkitAppRegion: 'drag',
     WebkitUserSelect: 'none',
+  },
+  MenuItems: {
+    overflow: 'scroll',
   },
   MenuItem: {
     display: 'flex',
@@ -78,18 +81,20 @@ const Menu = () => {
       <div className={s.Title}>
         Messsenger
       </div>
-      {apps.map(app =>
-        <NavLink className={s.MenuItem} key={app.id} to={`/app/${app.id}`}>
-          <img alt={app.name} src={app.iconUrl} />
-          {app.notificationsCount > 0 &&
-            <span className={s.NotificationsBadge} />
-          }
-          <Toolbar appId={app.id} className={s.Toolbar} />
+      <div className={s.MenuItems}>
+        {apps.map(app =>
+          <NavLink className={s.MenuItem} key={app.id} to={`/app/${app.id}`}>
+            <img alt={app.name} src={app.iconUrl} />
+            {app.notificationsCount > 0 &&
+              <span className={s.NotificationsBadge} />
+            }
+            <Toolbar appId={app.id} className={s.Toolbar} />
+          </NavLink>
+        )}
+        <NavLink className={s.MenuItem} to="/settings">
+          <SvgIcon className={s.SettingsIcon} name="settings" size={30} />
         </NavLink>
-      )}
-      <NavLink className={s.MenuItem} to="/settings">
-        <SvgIcon className={s.SettingsIcon} name="settings" size={30} />
-      </NavLink>
+      </div>
     </div>
   );
 }
