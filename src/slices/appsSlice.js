@@ -106,6 +106,18 @@ export const slice = createSlice({
       state.splice(appIndex, 1);
       persistState(state);
     },
+    moveAppUp: (state, action) => {
+      // console.log('reducer moveAppUp', action);
+      const { appId } = action.payload;
+      const appIndex = state.findIndex(a => a.id === appId);
+      if (appIndex === 0) {
+        return;
+      }
+      const temp = state[appIndex];
+      state[appIndex] = state[appIndex - 1];
+      state[appIndex - 1] = temp;
+      persistState(state);
+    },
     updateApp: (state, action) => {
       // console.log('reducer updateApp', action);
       const { appId, app } = action.payload;
@@ -122,7 +134,7 @@ export const slice = createSlice({
   },
 });
 
-export const { addApp, deleteApp, updateApp, updateAppNotificationsCount } = slice.actions;
+export const { addApp, deleteApp, moveAppUp, updateApp, updateAppNotificationsCount } = slice.actions;
 
 export const selectApps = state => state.apps;
 

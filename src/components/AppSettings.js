@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useForm } from '../hooks';
 import { selectAppById, ACTION_REQUIRED_REFRESH } from '../slices/appsSlice';
-import { deleteApp, updateApp } from '../slices/appsSlice';
+import { deleteApp, moveAppUp, updateApp } from '../slices/appsSlice';
 import Button from './Button';
 import FormInput from './FormInput';
 import FormToggleSwitch from './FormToggleSwitch';
@@ -77,6 +77,7 @@ const AppSettings = ({ appId }) => {
           <div className={s.Url}>
             {app.url && `(${app.url})`}
           </div>
+          <Button label="Move up" onClick={() => dispatch(moveAppUp({ appId }))} />
           <Button label="Edit" onClick={() => setIsEdit(true)} />
           <Button label="Delete" onClick={() => dispatch(deleteApp({ appId }))} />
         </div>
