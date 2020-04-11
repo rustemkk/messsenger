@@ -10,6 +10,7 @@ import { selectAppById, ACTION_REQUIRED_REFRESH } from '../slices/appsSlice';
 import { deleteApp, updateApp } from '../slices/appsSlice';
 import Button from './Button';
 import FormInput from './FormInput';
+import FormToggleSwitch from './FormToggleSwitch';
 
 
 const useStyles = createUseStyles({
@@ -125,9 +126,14 @@ const AppSettings = ({ appId }) => {
         {...form}
       />
       <FormInput
-        label="Zoom Factor"
+        label="Zoom factor"
         name="zoomFactor"
         placeholder="Zoom Factor (1 - regular view, try 0.9 or 1.2 to adjust zoom of the app)"
+        {...form}
+      />
+      <FormToggleSwitch
+        label="Keep always active"
+        name="isAlwaysActive"
         {...form}
       />
       <div className={s.Buttons}>

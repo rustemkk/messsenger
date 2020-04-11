@@ -159,7 +159,7 @@ const AppsPage = () => {
     <div className={cn(s.AppsPage, appId && s.AppsPageVisible)}>
       {apps.map(app =>
         <div className={cn(s.WebViewContainer, appId === app.id && s.WebViewContainerVisible)} key={app.id}>
-          {app.actionRequired !== ACTION_REQUIRED_REFRESH &&
+          {(app.isAlwaysActive || appId === app.id) && app.actionRequired !== ACTION_REQUIRED_REFRESH &&
             <WebView
               allowpopups
               className={s.WebView}
