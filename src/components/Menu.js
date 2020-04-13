@@ -25,12 +25,17 @@ const useStyles = createUseStyles({
     WebkitUserSelect: 'none',
   },
   MenuItems: {
-    overflow: 'scroll',
+    overflowY: 'scroll',
+    width: '300px',
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    }
   },
   MenuItem: {
+    width: ({ theme }) => theme.menuWidth,
     display: 'flex',
     position: 'relative',
-    padding: '5px',
+    padding: '5px 0',
     marginBottom: '5px',
     alignItems: 'center',
     justifyContent: 'center',

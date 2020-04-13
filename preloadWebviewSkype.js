@@ -1,4 +1,5 @@
-require('./preloadWebview');
+// require('./preloadWebview');
+// TODO: find problem for skype notification override - right now r it equires reload for every fired notification
 
 
 setTimeout(() => {

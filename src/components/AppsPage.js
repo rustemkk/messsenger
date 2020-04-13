@@ -67,7 +67,7 @@ const AppsPage = () => {
     // DevTools for webview app
     webViewRef && app.isWithDevTools && !webViewRef.isDevToolsOpened() && webViewRef.openDevTools();
     webViewRef && webViewRef.setZoomFactor(+app.zoomFactor || 0.9);
-    webViewRef && webViewRef.setAudioMuted(true);
+    // webViewRef && webViewRef.setAudioMuted(true);
   }
 
   const onIpcMessage = (e, app) => {
@@ -82,8 +82,8 @@ const AppsPage = () => {
         window.ipcRendererSend('notificationClicked', null);
         history.push(`/app/${app.id}`);
       };
-      const audioElement = document.getElementsByClassName('audio-element')[0];
-      audioElement.play();
+      // const audioElement = document.getElementsByClassName('audio-element')[0];
+      // audioElement.play();
       setTimeout(notification.close.bind(notification), 6000);
     }
   }
