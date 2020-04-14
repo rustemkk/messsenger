@@ -33,6 +33,7 @@ const useStyles = createUseStyles({
   },
   MenuItem: {
     width: ({ theme }) => theme.menuWidth,
+    height: ({ theme }) => `calc(${theme.menuWidth} * 0.75)`,
     display: 'flex',
     position: 'relative',
     padding: '5px 0',
@@ -46,8 +47,8 @@ const useStyles = createUseStyles({
       },
     },
     '& img': {
-      maxWidth: '50px',
-      maxHeight: '50px',
+      maxWidth: ({ theme }) => `calc(${theme.menuWidth} * 0.65)`,
+      maxHeight: ({ theme }) => `calc(${theme.menuWidth} * 0.65)`,
     },
     '&.active': {
       backgroundColor: '#ffffff22',
