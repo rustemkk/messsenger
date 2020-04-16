@@ -1,3 +1,4 @@
 node_modules
 build-frontend
-build-output
+build-output/*
+!build-output/Messsenger-1.0.0.dmg
