@@ -145,6 +145,7 @@ export const selectAppById = (appId) => createSelector(
 
 export default slice.reducer;
 
+export const ACTION_REQUIRED_COPY_URL = 'ACTION_REQUIRED_COPY_URL';
 export const ACTION_REQUIRED_GO_BACK = 'ACTION_REQUIRED_GO_BACK';
 export const ACTION_REQUIRED_GO_FORWARD = 'ACTION_REQUIRED_GO_FORWARD';
 export const ACTION_REQUIRED_GO_HOME = 'ACTION_REQUIRED_GO_HOME';

@@ -5,10 +5,10 @@ import { createUseStyles, useTheme } from 'react-jss';
 import SvgIcon from './SvgIcon';
 import { useDispatch } from 'react-redux';
 import {
+  ACTION_REQUIRED_COPY_URL,
   ACTION_REQUIRED_GO_BACK,
   ACTION_REQUIRED_GO_FORWARD,
   ACTION_REQUIRED_GO_HOME,
-  ACTION_REQUIRED_REFRESH,
   updateApp,
 } from '../slices/appsSlice';
 
@@ -57,8 +57,8 @@ const Toolbar = ({ appId, className }) => {
       <div className={s.ToolbarItem}>
         <SvgIcon
           className={s.Icon}
-          name="refresh"
-          onClick={() => dispatch(updateApp({ appId, app: { actionRequired: ACTION_REQUIRED_REFRESH } }))}
+          name="link"
+          onClick={() => dispatch(updateApp({ appId, app: { actionRequired: ACTION_REQUIRED_COPY_URL } }))}
           size={30}
         />
       </div>

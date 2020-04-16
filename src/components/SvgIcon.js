@@ -7,6 +7,7 @@ const icons = [
   'arrowLeft',
   'arrowRight',
   'home',
+  'link',
   'refresh',
   'settings',
 ].reduce((acc, curr) => ({ ...acc, [curr]: require(`../svg/${curr}.svg`) }), {});

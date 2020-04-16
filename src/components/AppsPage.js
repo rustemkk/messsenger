@@ -7,6 +7,7 @@ import { createUseStyles, useTheme } from 'react-jss';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
+  ACTION_REQUIRED_COPY_URL,
   ACTION_REQUIRED_GO_BACK,
   ACTION_REQUIRED_GO_FORWARD,
   ACTION_REQUIRED_GO_HOME,
@@ -15,6 +16,7 @@ import {
   updateAppNotificationsCount,
 } from '../slices/appsSlice';
 import { selectApps } from '../slices/appsSlice';
+import { copyTextToClipboard } from '../utils';
 
 
 const useStyles = createUseStyles({
@@ -139,6 +141,10 @@ const AppsPage = () => {
       if (app.actionRequired) {
         const webViewRef = refs[app.id];
         switch (app.actionRequired) {
+          case ACTION_REQUIRED_COPY_URL:
+            const url = webViewRef && webViewRef.getURL();
+            copyTextToClipboard(url);
+            break;
           case ACTION_REQUIRED_GO_BACK:
             webViewRef && webViewRef.goBack();
             break;
