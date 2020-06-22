@@ -12,7 +12,7 @@ To try the app - check build-output folder.
 > npm install
 ```
 
-3. to start app in development mode:
+3. to start app in development mode with hot module replacement:
 
 ```
 > npm start
@@ -23,7 +23,7 @@ To try the app - check build-output folder.
 > npm run package:mac
 ```
 
-5. to build Wimndows version (need to run on Windows machine):
+5. to build Windows version (need to run on Windows machine):
 ```
 > npm run package:win
 ```
